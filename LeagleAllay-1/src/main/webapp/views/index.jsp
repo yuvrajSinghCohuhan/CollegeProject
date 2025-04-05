@@ -43,7 +43,7 @@
                         <div class="carousel-caption">
                             <h1 class="animated fadeInLeft">We fight for your justice</h1>
                             <p class="animated fadeInRight">Lorem ipsum dolor sit amet elit. Mauris odio mauris...</p>
-                            <a class="btn animated fadeInUp" href="#">Get free consultation</a>
+                            <a class="btn animated fadeInUp" href="/user/appointment">Get free consultation</a>
                         </div>
                     </div>
 
@@ -52,7 +52,7 @@
                         <div class="carousel-caption">
                             <h1 class="animated fadeInLeft">We prepared to oppose for you</h1>
                             <p class="animated fadeInRight">Lorem ipsum dolor sit amet elit. Mauris odio mauris...</p>
-                            <a class="btn animated fadeInUp" href="#">Get free consultation</a>
+                            <a class="btn animated fadeInUp" href="/user/appointment">Get free consultation</a>
                         </div>
                     </div>
 
@@ -61,7 +61,7 @@
                         <div class="carousel-caption">
                             <h1 class="animated fadeInLeft">We fight for your privilege</h1>
                             <p class="animated fadeInRight">Lorem ipsum dolor sit amet elit. Mauris odio mauris...</p>
-                            <a class="btn animated fadeInUp" href="#">Get free consultation</a>
+                            <a class="btn animated fadeInUp" href="/user/appointment">Get free consultation</a>
                         </div>
                     </div>
                 </div>
@@ -136,7 +136,7 @@
                                 <p>
                                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec pretium mi. Curabitur facilisis ornare velit non vulputate. Aliquam metus tortor, auctor id gravida condimentum, viverra quis sem. Curabitur non nisl nec nisi scelerisque maximus. Aenean consectetur convallis porttitor. Aliquam interdum at lacus non blandit.
                                 </p>
-                                <a class="btn" href="">Learn More</a>
+                                <a class="btn" href="/user/about">Learn More</a>
                             </div>
                         </div>
                     </div>

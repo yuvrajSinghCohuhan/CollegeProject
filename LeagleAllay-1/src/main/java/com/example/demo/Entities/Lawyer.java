@@ -9,12 +9,19 @@ public class Lawyer {
     private String name;
     private String specialization;
     private String email;
+    private String password;
     private String phone;
 	public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {
 		this.id = id;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	public String getName() {
 		return name;
@@ -44,11 +51,12 @@ public class Lawyer {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Lawyer(String name, String specialization, String email, String phone) {
+	public Lawyer(String name, String specialization, String email, String password, String phone) {
 		super();
 		this.name = name;
 		this.specialization = specialization;
 		this.email = email;
+		this.password = password;
 		this.phone = phone;
 	}
 	@Override

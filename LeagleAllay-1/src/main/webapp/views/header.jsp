@@ -50,6 +50,11 @@
                     <a href="/user/service" class="nav-item nav-link">Practice</a>
                     <a href="/user/team" class="nav-item nav-link">Attorneys</a>
                     <a href="/user/portfolio" class="nav-item nav-link">Case Studies</a>
+                    <% 
+                    String email = (String)session.getAttribute("email");
+                    if (email != null) { %>
+                    <a class="nav-item nav-link" href="/user/dashboard">Dashboard</a>
+                <%} %>
                     <div class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
                         <div class="dropdown-menu">
@@ -68,10 +73,13 @@
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown">Register</a>
                         <div class="dropdown-menu">
                             <a href="/user/clientRegister" class="dropdown-item">Client</a>
-                            <a href="/user/lawyerRegister" class="dropdown-item">Single Page</a>
+                            <a href="/user/lawyerRegister" class="dropdown-item">Lawyer</a>
                         </div>
                     </div>
                     <a href="/user/contact" class="nav-item nav-link">Contact</a>
+                </div>
+                <div class="ml-auto">
+                    <a class="btn btn-danger" href="/user/logout">Logout</a>
                 </div>
                 <div class="ml-auto">
                     <a class="btn btn-primary" href="/user/appointment">Get Appointment</a>

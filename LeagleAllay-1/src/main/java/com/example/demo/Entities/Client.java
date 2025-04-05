@@ -8,10 +8,20 @@ public class Client {
     private Long id;
     private String name;
     private String email;
+    private String password;
     private String phone;
 
     @OneToOne
     private Booking booking;
+
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
 	public Long getId() {
 		return id;
@@ -58,12 +68,22 @@ public class Client {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Client(String name, String email, String phone, Booking booking) {
+
+	public Client(String name, String email, String password, String phone, Booking booking) {
 		super();
 		this.name = name;
 		this.email = email;
+		this.password = password;
 		this.phone = phone;
 		this.booking = booking;
+	}
+
+	public Client(String name, String email, String password, String phone) {
+		super();
+		this.name = name;
+		this.email = email;
+		this.password = password;
+		this.phone = phone;
 	}
 
 	@Override
