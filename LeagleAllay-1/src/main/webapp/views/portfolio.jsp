@@ -96,7 +96,7 @@
                         </div>
                         <div class="col-lg-4 col-md-6 col-sm-12 portfolio-item first">
                             <div class="portfolio-wrap">
-                                <img src="img/portfolio-4.jpg" alt="Portfolio Image">
+                                <img src="/views/img/portfolio-4.jpg" alt="Portfolio Image">
                                 <figure>
                                     <p>Finance</p>
                                     <a href="#">Money Laundering</a>
