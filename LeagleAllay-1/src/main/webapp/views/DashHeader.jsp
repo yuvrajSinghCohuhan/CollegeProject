@@ -10,7 +10,17 @@
 <%
     String email = (String) session.getAttribute("email");
     String role = (String) session.getAttribute("role");
-%>
+    if(email==null){
+    	response.sendRedirect("/user/home");
+    	return;
+    }else{%>
+    <script type="text/javascript">
+    function login(){
+    	alert("Login Successfull.......");
+    }
+    login();
+    </script>
+<%}%>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="/home.jsp">Kanun</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent">

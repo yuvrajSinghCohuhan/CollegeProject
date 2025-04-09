@@ -95,7 +95,7 @@ public class MainController {
 				return "DashBoard";
 			}
 		}
-		
+		session.setAttribute("failed", "Login Failed");
 		return "Login";
 	}
 	
@@ -167,6 +167,12 @@ public class MainController {
 			}
 		}
 		return "Login";
+	}
+	
+	@RequestMapping("profile")
+	public String profile() {
+
+		return "profile";
 	}
 
 }

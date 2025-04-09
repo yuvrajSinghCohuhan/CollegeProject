@@ -30,12 +30,25 @@
 
 <!-- Template Stylesheet -->
 <link href="/views/css/style.css" rel="stylesheet">
+<style type="text/css">
+.feature-img img {
+    width: 100%;
+    height: auto;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    border-radius: 8px;
+}
+
+.feature-img img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+</style>
 </head>
 
 <body>
 	<div class="wrapper">
 		<jsp:include page="header.jsp"></jsp:include>
-
 
 		<!-- Page Header Start -->
 		<div class="page-header">
@@ -52,7 +65,6 @@
 		</div>
 		<!-- Page Header End -->
 
-
 		<!-- Service Start -->
 <div class="service">
     <div class="container">
@@ -66,7 +78,7 @@
                         <i class="fa fa-landmark"></i>
                     </div>
                     <h3>Civil Law</h3>
-                    <p>Lorem ipsum dolor sit amet elit. Phasellus nec pretium mi. Curabitur facilisis ornare velit non</p>
+                    <p>We handle disputes between individuals and organizations, including property issues, contracts, and personal injury claims.</p>
                     <form action="/user/lawDetails" method="get">
                         <input type="hidden" name="id" value="civil">
                         <a href="#" onclick="event.preventDefault(); this.closest('form').submit();" class="btn">Learn More</a>
@@ -80,7 +92,7 @@
                         <i class="fa fa-users"></i>
                     </div>
                     <h3>Family Law</h3>
-                    <p>Lorem ipsum dolor sit amet elit. Phasellus nec pretium mi. Curabitur facilisis ornare velit non</p>
+                    <p>Our family law experts provide assistance in matters like divorce, child custody, alimony, and adoption procedures.</p>
                     <form action="/user/lawDetails" method="get">
                         <input type="hidden" name="id" value="family">
                         <a href="#" onclick="event.preventDefault(); this.closest('form').submit();" class="btn">Learn More</a>
@@ -94,7 +106,7 @@
                         <i class="fa fa-hand-holding-usd"></i>
                     </div>
                     <h3>Business Law</h3>
-                    <p>Lorem ipsum dolor sit amet elit. Phasellus nec pretium mi. Curabitur facilisis ornare velit non</p>
+                    <p>We offer legal support for businesses, including contract drafting, mergers and acquisitions, and regulatory compliance.</p>
                     <form action="/user/lawDetails" method="get">
                         <input type="hidden" name="id" value="business">
                         <a href="#" onclick="event.preventDefault(); this.closest('form').submit();" class="btn">Learn More</a>
@@ -108,7 +120,7 @@
                         <i class="fa fa-graduation-cap"></i>
                     </div>
                     <h3>Education Law</h3>
-                    <p>Lorem ipsum dolor sit amet elit. Phasellus nec pretium mi. Curabitur facilisis ornare velit non</p>
+                    <p>We represent students, parents, and educational institutions in matters of academic rights, policies, and discrimination.</p>
                     <form action="/user/lawDetails" method="get">
                         <input type="hidden" name="id" value="education">
                         <a href="#" onclick="event.preventDefault(); this.closest('form').submit();" class="btn">Learn More</a>
@@ -122,7 +134,7 @@
                         <i class="fa fa-gavel"></i>
                     </div>
                     <h3>Criminal Law</h3>
-                    <p>Lorem ipsum dolor sit amet elit. Phasellus nec pretium mi. Curabitur facilisis ornare velit non</p>
+                    <p>Our criminal defense attorneys protect your rights and provide representation in cases involving theft, assault, or fraud.</p>
                     <form action="/user/lawDetails" method="get">
                         <input type="hidden" name="id" value="criminal">
                         <a href="#" onclick="event.preventDefault(); this.closest('form').submit();" class="btn">Learn More</a>
@@ -136,7 +148,7 @@
                         <i class="fa fa-globe"></i>
                     </div>
                     <h3>Cyber Law</h3>
-                    <p>Lorem ipsum dolor sit amet elit. Phasellus nec pretium mi. Curabitur facilisis ornare velit non</p>
+                    <p>We deal with cybercrime, data protection, and online fraud, ensuring your digital rights and privacy are safeguarded.</p>
                     <form action="/user/lawDetails" method="get">
                         <input type="hidden" name="id" value="cyber">
                         <a href="#" onclick="event.preventDefault(); this.closest('form').submit();" class="btn">Learn More</a>
@@ -147,8 +159,6 @@
     </div>
 </div>
 <!-- Service End -->
-
-
 
 		<!-- Feature Start -->
 		<div class="feature">
@@ -166,8 +176,7 @@
 							</div>
 							<div class="col-7">
 								<h3>Best law practices</h3>
-								<p>Lorem ipsum dolor sit amet elit. Phasellus nec pretium
-									mi. Curabitur facilisis ornare velit non vulputate.</p>
+								<p>We follow industry-leading practices to ensure the highest level of professionalism, ethics, and legal excellence.</p>
 							</div>
 						</div>
 						<div class="row align-items-center feature-item">
@@ -178,8 +187,7 @@
 							</div>
 							<div class="col-7">
 								<h3>Efficiency & Trust</h3>
-								<p>Lorem ipsum dolor sit amet elit. Phasellus nec pretium
-									mi. Curabitur facilisis ornare velit non vulputate.</p>
+								<p>Our team prioritizes transparency and timely execution, building trust with each client through clear communication.</p>
 							</div>
 						</div>
 						<div class="row align-items-center feature-item">
@@ -190,8 +198,7 @@
 							</div>
 							<div class="col-7">
 								<h3>Results you deserve</h3>
-								<p>Lorem ipsum dolor sit amet elit. Phasellus nec pretium
-									mi. Curabitur facilisis ornare velit non vulputate.</p>
+								<p>We work tirelessly to deliver the outcomes that serve your best interests, both legally and personally.</p>
 							</div>
 						</div>
 					</div>
@@ -204,32 +211,11 @@
 			</div>
 		</div>
 		<!-- Feature End -->
-
-
-		<!-- Newsletter Start -->
-		<div class="newsletter">
-			<div class="container">
-				<div class="section-header">
-					<h2>Subscribe Our Newsletter</h2>
-				</div>
-				<div class="form">
-					<input class="form-control" placeholder="Email here">
-					<button class="btn">Submit</button>
-				</div>
-			</div>
-		</div>
-		<!-- Newsletter End -->
-
-
-		<jsp:include page="footer.jsp"></jsp:include>
-
-		<a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
 	</div>
 
 	<!-- JavaScript Libraries -->
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-	<script
-		src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
 	<script src="/views/lib/easing/easing.min.js"></script>
 	<script src="/views/lib/owlcarousel/owl.carousel.min.js"></script>
 	<script src="/views/lib/isotope/isotope.pkgd.min.js"></script>
