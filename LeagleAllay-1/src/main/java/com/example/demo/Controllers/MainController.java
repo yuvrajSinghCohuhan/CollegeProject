@@ -3,7 +3,9 @@ package com.example.demo.Controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.Entities.Client;
@@ -11,6 +13,7 @@ import com.example.demo.Entities.Lawyer;
 import com.example.demo.Service.ClientService;
 import com.example.demo.Service.LawyerService;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -67,8 +70,31 @@ public class MainController {
 		if(email==null) {
 			return "redirect:/user/login";
 		}
-		return "index";//adhura hai abhiiiiiii
+		return "team";
 	}
+	
+	@RequestMapping("lawyerProfile")
+	public String lawyerProfile(@RequestParam(value = "id")long id,HttpSession session) {
+		Lawyer l = new Lawyer();
+		if(id==2) {
+			l = lservice.findLawyer(id);
+		}
+		else if(id==3) {
+			l = lservice.findLawyer(id);
+		}
+		else if(id==4) {
+			l = lservice.findLawyer(id);
+		}
+		else if(id==5) {
+			l = lservice.findLawyer(id);
+		}
+		else {
+			return "redirect:/user/home";
+		}
+		session.setAttribute("lawyer", l);
+		return "lawyerProfile";//adhura hai abhiiiiiii
+	}
+	
 	//========================================================================
 	
 	@RequestMapping("lawDetails")
@@ -77,27 +103,45 @@ public class MainController {
 		return "LawDetails";
 	}
 	
-	@RequestMapping("loginTask")
-	public String loginTask(@RequestParam(value = "email") String email,
-			@RequestParam(value = "password") String password, @RequestParam(value = "role") String role,HttpSession session) {
-		
-		session.setAttribute("role",role);
-		if(role.equals("client")) {
-		Client c = clservice.verify(email,password);
-		if(c!=null) {
-			session.setAttribute("email", email);
-		return "DashBoard";
-		}
-		}else if(role.equals("lawyer")) {
-			Lawyer l = lservice.verify(email,password);
-			if(l!=null) {
-				session.setAttribute("email", email);
-				return "DashBoard";
-			}
-		}
-		session.setAttribute("failed", "Login Failed");
-		return "Login";
+	@PostMapping("loginTask")
+	public String loginTask(
+	        @RequestParam("email") String email,
+	        @RequestParam("password") String password,
+	        @RequestParam("role") String role,
+	        HttpSession session) {
+
+	    if (email == null || email.trim().isEmpty() || password == null || password.trim().isEmpty()) {
+	        session.setAttribute("failed", "Email or Password is required.");
+	        return "redirect:/user/login";
+	    }
+
+	    session.setAttribute("role", role);
+
+	    if ("client".equalsIgnoreCase(role)) {
+	        Client c = clservice.verify(email, password);
+	        if (c != null) {
+	            session.setAttribute("email", email);
+	            session.setAttribute("client", c);
+	            return "ClientDashboard"; // consider separating dashboards
+	        }
+	    } else if ("lawyer".equalsIgnoreCase(role)) {
+	        Lawyer l = lservice.verify(email, password);
+	        if (l != null) {
+	            session.setAttribute("email", email);
+	            session.setAttribute("lawyer", l);
+	            return "LawyerDashboard"; // or keep it generic if shared
+	        }
+	    }
+
+	    session.setAttribute("failed", "Invalid credentials or role.");
+	    return "redirect:/user/login";
 	}
+	@GetMapping("loginTask")
+	public String handleInvalidGetLoginTask(HttpServletRequest request) {
+	    System.out.println("GET request blocked for loginTask from: " + request.getRemoteAddr());
+	    return "redirect:/user/login";
+	}
+
 	
 	@RequestMapping("logout")
 	public String logout(HttpSession session) {

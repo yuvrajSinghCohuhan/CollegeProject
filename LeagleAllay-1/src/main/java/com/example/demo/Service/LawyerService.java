@@ -1,5 +1,7 @@
 package com.example.demo.Service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -22,6 +24,15 @@ public class LawyerService {
 	public Lawyer verify(String email, String password) {
 		Lawyer l = ldao.findByEmailAndPassword(email,password);
 		if(l!=null) {
+			return l;
+		}
+		return null;
+	}
+
+	public Lawyer findLawyer(long id) {
+		Optional<Lawyer> op = ldao.findById(id);
+		if(op.isPresent()) {
+			Lawyer l = op.get();
 			return l;
 		}
 		return null;

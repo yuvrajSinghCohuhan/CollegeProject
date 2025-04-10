@@ -145,7 +145,152 @@
             <!-- About End -->
 
 
-            <jsp:include page="service.jsp"></jsp:include>
+            <!-- Service Start -->
+<div class="service">
+    <div class="container">
+        <div class="section-header">
+            <h2>Our Practices Areas</h2>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 col-md-6">
+                <div class="service-item">
+                    <div class="service-icon">
+                        <i class="fa fa-landmark"></i>
+                    </div>
+                    <h3>Civil Law</h3>
+                    <p>We handle disputes between individuals and organizations, including property issues, contracts, and personal injury claims.</p>
+                    <form action="/user/lawDetails" method="get">
+                        <input type="hidden" name="id" value="civil">
+                        <a href="#" onclick="event.preventDefault(); this.closest('form').submit();" class="btn">Learn More</a>
+                    </form>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+                <div class="service-item">
+                    <div class="service-icon">
+                        <i class="fa fa-users"></i>
+                    </div>
+                    <h3>Family Law</h3>
+                    <p>Our family law experts provide assistance in matters like divorce, child custody, alimony, and adoption procedures.</p>
+                    <form action="/user/lawDetails" method="get">
+                        <input type="hidden" name="id" value="family">
+                        <a href="#" onclick="event.preventDefault(); this.closest('form').submit();" class="btn">Learn More</a>
+                    </form>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+                <div class="service-item">
+                    <div class="service-icon">
+                        <i class="fa fa-hand-holding-usd"></i>
+                    </div>
+                    <h3>Business Law</h3>
+                    <p>We offer legal support for businesses, including contract drafting, mergers and acquisitions, and regulatory compliance.</p>
+                    <form action="/user/lawDetails" method="get">
+                        <input type="hidden" name="id" value="business">
+                        <a href="#" onclick="event.preventDefault(); this.closest('form').submit();" class="btn">Learn More</a>
+                    </form>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+                <div class="service-item">
+                    <div class="service-icon">
+                        <i class="fa fa-graduation-cap"></i>
+                    </div>
+                    <h3>Education Law</h3>
+                    <p>We represent students, parents, and educational institutions in matters of academic rights, policies, and discrimination.</p>
+                    <form action="/user/lawDetails" method="get">
+                        <input type="hidden" name="id" value="education">
+                        <a href="#" onclick="event.preventDefault(); this.closest('form').submit();" class="btn">Learn More</a>
+                    </form>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+                <div class="service-item">
+                    <div class="service-icon">
+                        <i class="fa fa-gavel"></i>
+                    </div>
+                    <h3>Criminal Law</h3>
+                    <p>Our criminal defense attorneys protect your rights and provide representation in cases involving theft, assault, or fraud.</p>
+                    <form action="/user/lawDetails" method="get">
+                        <input type="hidden" name="id" value="criminal">
+                        <a href="#" onclick="event.preventDefault(); this.closest('form').submit();" class="btn">Learn More</a>
+                    </form>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+                <div class="service-item">
+                    <div class="service-icon">
+                        <i class="fa fa-globe"></i>
+                    </div>
+                    <h3>Cyber Law</h3>
+                    <p>We deal with cybercrime, data protection, and online fraud, ensuring your digital rights and privacy are safeguarded.</p>
+                    <form action="/user/lawDetails" method="get">
+                        <input type="hidden" name="id" value="cyber">
+                        <a href="#" onclick="event.preventDefault(); this.closest('form').submit();" class="btn">Learn More</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Service End -->
+
+		<!-- Feature Start -->
+		<div class="feature">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-7">
+						<div class="section-header">
+							<h2>Why Choose Us</h2>
+						</div>
+						<div class="row align-items-center feature-item">
+							<div class="col-5">
+								<div class="feature-icon">
+									<i class="fa fa-gavel"></i>
+								</div>
+							</div>
+							<div class="col-7">
+								<h3>Best law practices</h3>
+								<p>We follow industry-leading practices to ensure the highest level of professionalism, ethics, and legal excellence.</p>
+							</div>
+						</div>
+						<div class="row align-items-center feature-item">
+							<div class="col-5">
+								<div class="feature-icon">
+									<i class="fa fa-balance-scale"></i>
+								</div>
+							</div>
+							<div class="col-7">
+								<h3>Efficiency & Trust</h3>
+								<p>Our team prioritizes transparency and timely execution, building trust with each client through clear communication.</p>
+							</div>
+						</div>
+						<div class="row align-items-center feature-item">
+							<div class="col-5">
+								<div class="feature-icon">
+									<i class="far fa-smile"></i>
+								</div>
+							</div>
+							<div class="col-7">
+								<h3>Results you deserve</h3>
+								<p>We work tirelessly to deliver the outcomes that serve your best interests, both legally and personally.</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-5">
+						<div class="feature-img">
+							<img src="/views/img/feature.jpg" alt="Feature">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Feature End -->
             
             
             <!-- Team Start -->

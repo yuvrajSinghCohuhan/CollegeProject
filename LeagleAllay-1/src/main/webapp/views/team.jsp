@@ -97,7 +97,7 @@
 					<div class="col-lg-3 col-md-6">
 						<div class="team-item">
 							<div class="team-img">
-								<img src="/views/img/team-1.jpg" alt="Team Image">
+								<a href="/user/lawyerProfile?id=2"><img src="/views/img/team-1.jpg" alt="Team Image"></a>
 							</div>
 							<div class="team-text">
 								<h2>Adam Phillips</h2>
@@ -114,7 +114,7 @@
 					<div class="col-lg-3 col-md-6">
 						<div class="team-item">
 							<div class="team-img">
-								<img src="/views/img/team-2.jpg" alt="Team Image">
+								<a href="/user/lawyerProfile?id=3"><img src="/views/img/team-2.jpg" alt="Team Image"></a>
 							</div>
 							<div class="team-text">
 								<h2>Dylan Adams</h2>
@@ -131,7 +131,7 @@
 					<div class="col-lg-3 col-md-6">
 						<div class="team-item">
 							<div class="team-img">
-								<img src="/views/img/team-3.jpg" alt="Team Image">
+								<a href="/user/lawyerProfile?id=4"><img src="/views/img/team-3.jpg" alt="Team Image"></a>
 							</div>
 							<div class="team-text">
 								<h2>Gloria Edwards</h2>
@@ -148,7 +148,7 @@
 					<div class="col-lg-3 col-md-6">
 						<div class="team-item">
 							<div class="team-img">
-								<img src="/views/img/team-4.jpg" alt="Team Image">
+								<a href="/user/lawyerProfile?id=5"><img src="/views/img/team-4.jpg" alt="Team Image"></a>
 							</div>
 							<div class="team-text">
 								<h2>Josh Dunn</h2>

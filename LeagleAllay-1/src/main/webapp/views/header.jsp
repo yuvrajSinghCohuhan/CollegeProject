@@ -62,18 +62,13 @@
                             <a href="/user/single" class="dropdown-item">Single Page</a>
                         </div>
                     </div>
-                    <div class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown">Login</a>
-                        <div class="dropdown-menu">
-                            <a href="/user/login?role=client" class="dropdown-item">Client</a>
-                            <a href="/user/login?role=lawyer" class="dropdown-item">Lawyer</a>
-                        </div>
-                    </div>
+                    <a href="/user/login" class="nav-item nav-link">Login</a>
+                    
                     <div class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown">Register</a>
                         <div class="dropdown-menu">
-                            <a href="/user/clientRegister" class="dropdown-item">Client</a>
-                            <a href="/user/lawyerRegister" class="dropdown-item">Lawyer</a>
+                            <a href="/user/clientRegister" class="dropdown-item">As A Client</a>
+                            <a href="/user/lawyerRegister" class="dropdown-item">As A Lawyer</a>
                         </div>
                     </div>
                     <a href="/user/contact" class="nav-item nav-link">Contact</a>
