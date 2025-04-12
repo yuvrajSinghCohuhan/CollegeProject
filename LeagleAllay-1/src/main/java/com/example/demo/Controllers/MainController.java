@@ -103,7 +103,7 @@ public class MainController {
 		return "LawDetails";
 	}
 	
-	@PostMapping("loginTask")
+	@RequestMapping("loginTask")
 	public String loginTask(
 	        @RequestParam("email") String email,
 	        @RequestParam("password") String password,
@@ -122,7 +122,7 @@ public class MainController {
 	        if (c != null) {
 	            session.setAttribute("email", email);
 	            session.setAttribute("client", c);
-	            return "ClientDashboard"; // consider separating dashboards
+	            return "DashBoard"; // consider separating dashboards
 	        }
 	    } else if ("lawyer".equalsIgnoreCase(role)) {
 	        Lawyer l = lservice.verify(email, password);
@@ -133,7 +133,7 @@ public class MainController {
 	        }
 	    }
 
-	    session.setAttribute("failed", "Invalid credentials or role.");
+//	    session.setAttribute("failed", "Invalid credentials or role.");
 	    return "redirect:/user/login";
 	}
 	@GetMapping("loginTask")
