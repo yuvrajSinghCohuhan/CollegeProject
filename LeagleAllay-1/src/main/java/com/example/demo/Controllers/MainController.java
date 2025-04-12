@@ -129,7 +129,7 @@ public class MainController {
 	        if (l != null) {
 	            session.setAttribute("email", email);
 	            session.setAttribute("lawyer", l);
-	            return "LawyerDashboard"; // or keep it generic if shared
+	            return "DashBoard"; // or keep it generic if shared
 	        }
 	    }
 
