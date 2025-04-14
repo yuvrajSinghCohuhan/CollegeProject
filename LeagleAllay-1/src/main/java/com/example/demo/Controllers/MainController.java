@@ -7,10 +7,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.Entities.Client;
 import com.example.demo.Entities.Lawyer;
 import com.example.demo.Service.ClientService;
+import com.example.demo.Service.EmailService;
 import com.example.demo.Service.LawyerService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -23,6 +25,8 @@ public class MainController {
 	private ClientService clservice;
 	@Autowired
 	private LawyerService lservice;
+	@Autowired
+	private EmailService emailService;
 
 	@RequestMapping("home")
 	public String home() {
@@ -58,91 +62,85 @@ public class MainController {
 	public String login() {
 		return "Login";
 	}
-	
+
 	@RequestMapping("dashboard")
 	public String dashboard() {
 		return "DashBoard";
 	}
-	//========================================================================
+
+	// ========================================================================
 	@RequestMapping("appointment")
 	public String appointment(HttpSession session) {
-		String email = (String)session.getAttribute("email");
-		if(email==null) {
+		String email = (String) session.getAttribute("email");
+		if (email == null) {
 			return "redirect:/user/login";
 		}
 		return "team";
 	}
-	
+
 	@RequestMapping("lawyerProfile")
-	public String lawyerProfile(@RequestParam(value = "id")long id,HttpSession session) {
+	public String lawyerProfile(@RequestParam(value = "id") long id, HttpSession session) {
 		Lawyer l = new Lawyer();
-		if(id==2) {
+		if (id == 2) {
 			l = lservice.findLawyer(id);
-		}
-		else if(id==3) {
+		} else if (id == 3) {
 			l = lservice.findLawyer(id);
-		}
-		else if(id==4) {
+		} else if (id == 4) {
 			l = lservice.findLawyer(id);
-		}
-		else if(id==5) {
+		} else if (id == 5) {
 			l = lservice.findLawyer(id);
-		}
-		else {
+		} else {
 			return "redirect:/user/home";
 		}
 		session.setAttribute("lawyer", l);
-		return "lawyerProfile";//adhura hai abhiiiiiii
+		return "lawyerProfile";// adhura hai abhiiiiiii
 	}
-	
-	//========================================================================
-	
+
+	// ========================================================================
+
 	@RequestMapping("lawDetails")
-	public String lawDetails(@RequestParam()String id,HttpSession session) {
+	public String lawDetails(@RequestParam() String id, HttpSession session) {
 		session.setAttribute("id", id);
 		return "LawDetails";
 	}
-	
+
 	@RequestMapping("loginTask")
-	public String loginTask(
-	        @RequestParam("email") String email,
-	        @RequestParam("password") String password,
-	        @RequestParam("role") String role,
-	        HttpSession session) {
+	public String loginTask(@RequestParam("email") String email, @RequestParam("password") String password,
+			@RequestParam("role") String role, HttpSession session) {
 
-	    if (email == null || email.trim().isEmpty() || password == null || password.trim().isEmpty()) {
-	        session.setAttribute("failed", "Email or Password is required.");
-	        return "redirect:/user/login";
-	    }
+		if (email == null || email.trim().isEmpty() || password == null || password.trim().isEmpty()) {
+			session.setAttribute("failed", "Email or Password is required.");
+			return "redirect:/user/login";
+		}
 
-	    session.setAttribute("role", role);
+		session.setAttribute("role", role);
 
-	    if ("client".equalsIgnoreCase(role)) {
-	        Client c = clservice.verify(email, password);
-	        if (c != null) {
-	            session.setAttribute("email", email);
-	            session.setAttribute("client", c);
-	            return "DashBoard"; // consider separating dashboards
-	        }
-	    } else if ("lawyer".equalsIgnoreCase(role)) {
-	        Lawyer l = lservice.verify(email, password);
-	        if (l != null) {
-	            session.setAttribute("email", email);
-	            session.setAttribute("lawyer", l);
-	            return "DashBoard"; // or keep it generic if shared
-	        }
-	    }
+		if ("client".equalsIgnoreCase(role)) {
+			Client c = clservice.verify(email, password);
+			if (c != null) {
+				session.setAttribute("email", email);
+				session.setAttribute("client", c);
+				return "DashBoard"; // consider separating dashboards
+			}
+		} else if ("lawyer".equalsIgnoreCase(role)) {
+			Lawyer l = lservice.verify(email, password);
+			if (l != null) {
+				session.setAttribute("email", email);
+				session.setAttribute("lawyer", l);
+				return "DashBoard"; // or keep it generic if shared
+			}
+		}
 
 //	    session.setAttribute("failed", "Invalid credentials or role.");
-	    return "redirect:/user/login";
-	}
-	@GetMapping("loginTask")
-	public String handleInvalidGetLoginTask(HttpServletRequest request) {
-	    System.out.println("GET request blocked for loginTask from: " + request.getRemoteAddr());
-	    return "redirect:/user/login";
+		return "redirect:/user/login";
 	}
 
-	
+	@GetMapping("loginTask")
+	public String handleInvalidGetLoginTask(HttpServletRequest request) {
+		System.out.println("GET request blocked for loginTask from: " + request.getRemoteAddr());
+		return "redirect:/user/login";
+	}
+
 	@RequestMapping("logout")
 	public String logout(HttpSession session) {
 		session.setAttribute("email", null);
@@ -212,11 +210,46 @@ public class MainController {
 		}
 		return "Login";
 	}
-	
+
 	@RequestMapping("profile")
 	public String profile() {
 
 		return "profile";
 	}
+
+	@PostMapping("emailTask")
+	public String sendMessage(@RequestParam String name, @RequestParam String email, @RequestParam String subject,
+			@RequestParam String message) {
+
+		emailService.sendUserMessageToOwner(name, email, subject, message);
+		return "index";
+	}
+	
+	@PostMapping("/sendReq")
+	public String sendRequestToLawyer(HttpSession session, RedirectAttributes redirectAttributes) {
+	    Client client = (Client) session.getAttribute("client");
+	    Lawyer lawyer = (Lawyer) session.getAttribute("lawyer");
+
+	    if (client != null && lawyer != null) {
+	        String subject = "Client Request from " + client.getName();
+	        String message = "Hello " + lawyer.getName() + ",\n\n" +
+	                         "You have received a new request from a client.\n\n" +
+	                         "Client Details:\n" +
+	                         "Name: " + client.getName() + "\n" +
+	                         "Email: " + client.getEmail() + "\n" +
+	                         "Phone: " + client.getPhone() + "\n\n" +
+	                         "Please get in touch with the client if you're available.\n\n" +
+	                         "Regards,\nLegal Portal System";
+
+	        emailService.sendRequestToLawyer(
+	                lawyer.getEmail(), subject, message, client.getEmail()
+	        );
+	    }
+
+	    redirectAttributes.addAttribute("attempted", "true");
+	    return "redirect:/lawyerProfile";
+	}
+
+
 
 }

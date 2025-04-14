@@ -1,0 +1,100 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="base.jsp" %>
+
+<!-- About Start -->
+<div class="about">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-5 col-md-6">
+                <div class="about-img">
+                    <img src="/views/img/about.jpg" alt="Image">
+                </div>
+            </div>
+            <div class="col-lg-7 col-md-6">
+                <div class="section-header">
+                    <h2>Learn About Us</h2>
+                </div>
+                <div class="about-text">
+                    <p>
+                        At Kanun Law Firm, we believe in justice, integrity, and advocacy. With years of legal expertise and a passion for helping clients navigate complex legal matters, we are committed to delivering trusted and result-driven legal solutions.
+                    </p>
+                    <p>
+                        Our team specializes in civil, criminal, family, and corporate law. We work closely with our clients to understand their challenges and provide customized legal strategies that ensure their rights are protected and their voices are heard.
+                    </p>
+                    <a class="btn" href="">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- About End -->
+
+<!-- Timeline Start -->
+<div class="timeline">
+    <div class="container">
+        <div class="section-header">
+            <h2>Learn About Our Journey</h2>
+        </div>
+        <div class="timeline-start">
+            <div class="timeline-container left">
+                <div class="timeline-content">
+                    <h2><span>2020</span>Established Our Headquarters</h2>
+                    <p>
+                        We opened our main office with a mission to offer affordable and effective legal services to individuals and businesses alike.
+                    </p>
+                </div>
+            </div>
+            <div class="timeline-container right">
+                <div class="timeline-content">
+                    <h2><span>2019</span>Expanded Practice Areas</h2>
+                    <p>
+                        Our firm added specialists in family law, criminal defense, and property disputes to better serve our growing client base.
+                    </p>
+                </div>
+            </div>
+            <div class="timeline-container left">
+                <div class="timeline-content">
+                    <h2><span>2018</span>Recognized for Excellence</h2>
+                    <p>
+                        Kanun Law Firm was honored with the "Client Choice Award" for outstanding client satisfaction and service.
+                    </p>
+                </div>
+            </div>
+            <div class="timeline-container right">
+                <div class="timeline-content">
+                    <h2><span>2017</span>Started Internship Program</h2>
+                    <p>
+                        We launched our law internship program to mentor aspiring legal professionals and foster real-world experience.
+                    </p>
+                </div>
+            </div>
+            <div class="timeline-container left">
+                <div class="timeline-content">
+                    <h2><span>2016</span>First Major Case Victory</h2>
+                    <p>
+                        Achieved a landmark victory in a high-profile property dispute case, setting a legal precedent in the region.
+                    </p>
+                </div>
+            </div>
+            <div class="timeline-container right">
+                <div class="timeline-content">
+                    <h2><span>2015</span>Firm Founded</h2>
+                    <p>
+                        Kanun Law Firm was founded with a vision to make expert legal advice accessible to all, regardless of background.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Timeline End -->
+
+<!-- Footer About Section -->
+<div class="footer-about">
+    <div class="container">
+        <h2>About Us</h2>
+        <p>
+            Kanun Law Firm is a client-focused legal services provider offering expert counsel in civil, criminal, family, and corporate law. Our team of experienced attorneys ensures that every client receives personalized attention and strong representation.
+        </p>
+    </div>
+</div>
