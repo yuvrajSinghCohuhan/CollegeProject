@@ -1,3 +1,0 @@
-INDEX VERSION 1.134
-C:\Users\yuvra\Desktop\ProjectLawyer\project\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1659766717.index
-\LeagleAllay-1\src\main\java
