@@ -27,5 +27,16 @@ public class ClientService {
 		return null;
 	}
 
+	public Client getUser(String email, String password) {
+		// TODO Auto-generated method stub
+		Client cl = cldao.findByEmail(email);
+		if(cl!=null) {
+			cl.setPassword(password);
+			Client save = cldao.save(cl);
+		return save;
+		}
+		return null;
+	}
+
 
 }

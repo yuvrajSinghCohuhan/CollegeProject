@@ -38,6 +38,8 @@
                         <small id="passwordError" class="text-danger"></small>
                     </div>
                     <button type="submit" class="btn btn-dark btn-block">Login</button>
+                    <br>
+                    <a href="/user/forgetPass" style="color: blue;">forget password</a>
                 </form>
             </div>
         </div>

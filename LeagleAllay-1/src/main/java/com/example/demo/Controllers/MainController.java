@@ -17,6 +17,7 @@ import javax.mail.internet.MimeMessage;*/
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -300,6 +301,20 @@ public class MainController {
 	    }
 
 	    return "clientRequest";
+	}
+
+	@GetMapping("forgetPass")
+	public String forgPass() {
+		
+		return "ForgetPass";
+	}
+	@PostMapping("forgetPassword")
+	public String forgetPassword(@ModelAttribute Client cl) {
+	    Client user = clservice.getUser(cl.getEmail(), cl.getPassword());
+	    if (user != null) {
+	        return "redirect:/user/login";  // success - login page
+	    }
+	    return "ForgetPass"; // failure - redirect with error
 	}
 
 	
