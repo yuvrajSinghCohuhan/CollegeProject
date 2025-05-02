@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.example.demo.Dao.ClientRequestRepository;
+import com.example.demo.Entities.Client;
 import com.example.demo.Entities.ClientRequests;
 import com.example.demo.Entities.Lawyer;
 
@@ -29,7 +30,13 @@ public class ClientRequestsBl {
 	    return crepo.findByLawyer(lawyer); // no need for null check, JPA returns empty list
 	}
 
+	public void deleteById(long id) {
+		crepo.deleteById(id);
+		
+	}
+
 	
+
 	
 
 }

@@ -16,6 +16,7 @@ import javax.mail.internet.MimeMessage;*/
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -50,8 +51,7 @@ public class MainController {
 
 	@RequestMapping("home")
 	public String home(HttpSession session) {
-		List<Lawyer>list = lservice.findAllLawyer();
-		session.setAttribute("allLawyer", list);
+
 		return "index";
 	}
 
@@ -71,7 +71,9 @@ public class MainController {
 	}
 
 	@RequestMapping("team")
-	public String attorneys() {
+	public String attorneys(HttpSession session) {
+		List<Lawyer>ls = lservice.findAllLawyer();
+		session.setAttribute("allLawyer", ls);
 		return "team";
 	}
 
@@ -85,7 +87,7 @@ public class MainController {
 		return "Login";
 	}
 	
-	@RequestMapping("dashboard")
+	@GetMapping("dashboard")
 	public String dashboard() {
 		return "DashBoard";
 	}
@@ -129,7 +131,7 @@ public class MainController {
 	        HttpSession session) {
 
 	    if (email == null || email.trim().isEmpty() || password == null || password.trim().isEmpty()) {
-	        session.setAttribute("failed", "Email or Password is required.");
+	        session.setAttribute("loginError", true);
 	        return "redirect:/user/login";
 	    }
 
@@ -140,20 +142,22 @@ public class MainController {
 	        if (c != null) {
 	            session.setAttribute("email", email);
 	            session.setAttribute("client", c);
-	            return "DashBoard"; // consider separating dashboards
+	            return "DashBoard";
 	        }
 	    } else if ("lawyer".equalsIgnoreCase(role)) {
 	        Lawyer l = lservice.verify(email, password);
 	        if (l != null) {
 	            session.setAttribute("email", email);
 	            session.setAttribute("lawyer", l);
-	            return "DashBoard"; // or keep it generic if shared
+	            return "DashBoard";
 	        }
 	    }
 
-//	    session.setAttribute("failed", "Invalid credentials or role.");
+	    // If login fails
+	    session.setAttribute("loginError", true);
 	    return "redirect:/user/login";
 	}
+
 	@GetMapping("loginTask")
 	public String handleInvalidGetLoginTask(HttpServletRequest request) {
 	    System.out.println("GET request blocked for loginTask from: " + request.getRemoteAddr());
@@ -168,7 +172,7 @@ public class MainController {
 		session.setAttribute("client", null);
 		session.setAttribute("lawyer", null);
 		session.invalidate();
-		return "Login";
+		return "redirect:/user/login";
 	}
 
 	@GetMapping("single")
@@ -269,7 +273,6 @@ public class MainController {
 	public String sendRequestToLawyer(HttpSession session, RedirectAttributes redirectAttributes) {
 	    Client client = (Client) session.getAttribute("client");
 	    Lawyer lawyer = (Lawyer) session.getAttribute("lawyer");
-
 	    if (client != null && lawyer != null) {
 	        String subject = "Client Request from " + client.getName();
 	        String message = "Hello " + lawyer.getName() + ",\n\n" +
@@ -284,6 +287,7 @@ public class MainController {
 	        emailService.sendRequestToLawyer(
 	                lawyer.getEmail(), subject, message, client.getEmail()
 	        );
+	        
 	        ClientRequests clr = new ClientRequests(client, lawyer);
 	        clService.addRequest(clr);
 	    }
@@ -317,5 +321,29 @@ public class MainController {
 	    return "ForgetPass"; // failure - redirect with error
 	}
 
+	@GetMapping("edit")
+	public String editProfile(HttpSession session) {
+		return "Edit";
+	}
+	@GetMapping("userProfile")
+	public String userProfile(HttpSession session) {
+		
+		return "Edit";
+	}
+	@GetMapping("changepass")
+	public String changepass() {
+		return "ChangePassword";
+	}
+	@PostMapping("changePassword")
+	public String changePassword() {
+		return "ChangePassword";
+	}
+	
+	@PostMapping("updateClient")
+	public String updateClient(@ModelAttribute Client cl,HttpSession session) {
+		Client update = clservice.update(cl);
+		session.setAttribute("client", update);
+		return "redirect:/user/profile";
+	}
 	
 }

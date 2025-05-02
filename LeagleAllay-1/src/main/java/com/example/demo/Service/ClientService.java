@@ -1,5 +1,7 @@
 package com.example.demo.Service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -36,6 +38,20 @@ public class ClientService {
 		return save;
 		}
 		return null;
+	}
+
+	public List<Client> getAllClient() {
+		List<Client> all = cldao.findAll();
+		return all;
+	}
+
+	public Client update(Client cl) {
+		Client cl1 = cldao.findById(cl.getId()).get();
+		cl1.setEmail(cl.getEmail());
+		cl1.setName(cl.getName());
+		cl1.setPhone(cl.getPhone());
+		Client save = cldao.save(cl1);
+		return save;
 	}
 
 

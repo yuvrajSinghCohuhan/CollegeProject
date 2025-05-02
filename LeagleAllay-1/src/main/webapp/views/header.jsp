@@ -66,9 +66,11 @@
                     </div>
                     <a href="/user/contact" class="nav-item nav-link">Contact</a>
                 </div>
+               <% if (email != null) { %>   
                 <div class="ml-auto">
                     <a class="btn btn-success" href="/user/logout">Logout</a>
                 </div>
+                <%} %>
             </div>
         </nav>
     </div>

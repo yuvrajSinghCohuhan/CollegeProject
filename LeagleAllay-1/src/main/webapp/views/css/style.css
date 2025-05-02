@@ -84,6 +84,7 @@ a:focus {
     padding: 15px 0;
     text-align: left;
     overflow: hidden;
+    width: 500px;
 }
 
 .top-bar .logo h1 {
