@@ -54,5 +54,16 @@ public class ClientService {
 		return save;
 	}
 
+	public Client changePass(String password, String oldPass,Client client) {
+		Client cl = cldao.findByEmailAndPassword(client.getEmail(),oldPass);
+		if(cl!=null) {
+			cl.setPassword(password);
+			Client save = cldao.save(cl);
+			return save;
+		}
+		return null;
+		
+	}
+
 
 }

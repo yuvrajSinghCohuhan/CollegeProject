@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.Dao.LawyerDao;
+import com.example.demo.Entities.Client;
 import com.example.demo.Entities.Lawyer;
 
 @Component
@@ -48,6 +49,27 @@ public class LawyerService {
 		List<Lawyer> all = ldao.findAll();
 		if(all.size()!=0) {
 			return all;
+		}
+		return null;
+	}
+
+	public Lawyer update(Lawyer lw) {
+		Lawyer cl1 = ldao.findById(lw.getId()).get();
+		cl1.setEmail(lw.getEmail());
+		cl1.setName(lw.getName());
+		cl1.setPhone(lw.getPhone());
+		cl1.setSpecialization(lw.getSpecialization());
+		Lawyer save = ldao.save(cl1);
+		
+		return save;
+	}
+
+	public Lawyer changePass(String password, String oldPass, Lawyer lawyer) {
+		Lawyer lw = ldao.findByEmailAndPassword(lawyer.getEmail(),oldPass);
+		if(lw!=null) {
+			lw.setPassword(password);
+			Lawyer save = ldao.save(lw);
+			return save;
 		}
 		return null;
 	}

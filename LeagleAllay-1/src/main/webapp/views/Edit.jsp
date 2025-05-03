@@ -1,7 +1,9 @@
+<%@page import="com.example.demo.Entities.Lawyer"%>
 <%@page import="com.example.demo.Entities.Client"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
     Client client = (Client) session.getAttribute("client"); // assuming client object is passed to this page
+    Lawyer lawyer = (Lawyer) session.getAttribute("lawyer"); // assuming client object is passed to this page    
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,6 +29,7 @@
     <div class="contact">
         <div class="container">
             <div class="contact-form">
+            <%if(client!=null){ %>
                 <form action="/user/updateClient" method="post" onsubmit="return validateEditForm();">
                     <!-- ID (read-only) -->
                     <div class="form-group">
@@ -56,6 +59,42 @@
                         <button class="btn btn-dark" type="submit">Update Profile</button>
                     </div>
                 </form>
+                <%}else{ %>
+                <form action="/user/updateLawyer" method="post" onsubmit="return validateEditForm();">
+                    <!-- ID (read-only) -->
+                    <div class="form-group">
+                        <input type="text" name="id" id="id" class="form-control" value="<%= lawyer.getId() %>" readonly />
+                    </div>
+
+                    <!-- Name -->
+                    <div class="form-group">
+                        <input type="text" name="name" id="name" class="form-control" value="<%= lawyer.getName() %>" required />
+                        <small id="nameError" class="text-danger"></small>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="form-group">
+                        <input type="email" name="email" id="email" class="form-control" value="<%= lawyer.getEmail() %>" required />
+                        <small id="emailError" class="text-danger"></small>
+                    </div>
+
+                    <!-- Phone -->
+                    <div class="form-group">
+                        <input type="text" name="phone" id="phone" class="form-control" value="<%= lawyer.getPhone() %>" required />
+                        <small id="phoneError" class="text-danger"></small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <input type="text" name="specialization" id="specialization" class="form-control" value="<%= lawyer.getSpecialization() %>" required />
+                        <small id="specializationError" class="text-danger"></small>
+                    </div>
+
+                    <!-- Submit -->
+                    <div>
+                        <button class="btn btn-dark" type="submit">Update Profile</button>
+                    </div>
+                </form>
+                <%} %>
             </div>
         </div>
     </div>

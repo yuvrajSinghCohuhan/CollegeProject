@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
-    String email1 = (String) session.getAttribute("email");
+    String email1 = (String) session.getAttribute("adminMail");
     if (email1 == null) {
         response.sendRedirect("/admin/login");
     }

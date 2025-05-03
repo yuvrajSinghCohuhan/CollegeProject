@@ -46,8 +46,8 @@ public class MainController {
 	private LawyerService lservice;
 	@Autowired
 	private ClientRequestsBl clService;
-	 @Autowired
-	 private EmailService emailService;
+	@Autowired
+	private EmailService emailService;
 
 	@RequestMapping("home")
 	public String home(HttpSession session) {
@@ -72,7 +72,7 @@ public class MainController {
 
 	@RequestMapping("team")
 	public String attorneys(HttpSession session) {
-		List<Lawyer>ls = lservice.findAllLawyer();
+		List<Lawyer> ls = lservice.findAllLawyer();
 		session.setAttribute("allLawyer", ls);
 		return "team";
 	}
@@ -86,85 +86,81 @@ public class MainController {
 	public String login() {
 		return "Login";
 	}
-	
+
 	@GetMapping("dashboard")
 	public String dashboard() {
 		return "DashBoard";
 	}
-	//========================================================================
+
+	// ========================================================================
 	@RequestMapping("appointment")
 	public String appointment(HttpSession session) {
-		String email = (String)session.getAttribute("email");
-		if(email==null) {
+		String email = (String) session.getAttribute("email");
+		if (email == null) {
 			return "redirect:/user/login";
 		}
 		return "team";
 	}
-	
+
 	@RequestMapping("lawyerProfile")
-	public String lawyerProfile(@RequestParam(value = "id")long id,HttpSession session) {
+	public String lawyerProfile(@RequestParam(value = "id") long id, HttpSession session) {
 		Lawyer l = new Lawyer();
-		if(id!=0) {
+		if (id != 0) {
 			l = lservice.findLawyer(id);
 			session.setAttribute("lawyer", l);
-		}
-		else 
-		{
+			System.out.println(l + " lawyer ");
+		} else {
 			return "redirect:/user/home";
 		}
 		return "lawyerProfile";
 	}
-	
-	//========================================================================
-	
+
+	// ========================================================================
+
 	@RequestMapping("lawDetails")
-	public String lawDetails(@RequestParam()String id,HttpSession session) {
+	public String lawDetails(@RequestParam() String id, HttpSession session) {
 		session.setAttribute("id", id);
 		return "LawDetails";
 	}
-	
+
 	@RequestMapping("loginTask")
-	public String loginTask(
-	        @RequestParam("email") String email,
-	        @RequestParam("password") String password,
-	        @RequestParam("role") String role,
-	        HttpSession session) {
+	public String loginTask(@RequestParam("email") String email, @RequestParam("password") String password,
+			@RequestParam("role") String role, HttpSession session) {
 
-	    if (email == null || email.trim().isEmpty() || password == null || password.trim().isEmpty()) {
-	        session.setAttribute("loginError", true);
-	        return "redirect:/user/login";
-	    }
+		if (email == null || email.trim().isEmpty() || password == null || password.trim().isEmpty()) {
+			session.setAttribute("loginError", true);
+			return "redirect:/user/login";
+		}
 
-	    session.setAttribute("role", role);
+		session.setAttribute("role", role);
 
-	    if ("client".equalsIgnoreCase(role)) {
-	        Client c = clservice.verify(email, password);
-	        if (c != null) {
-	            session.setAttribute("email", email);
-	            session.setAttribute("client", c);
-	            return "DashBoard";
-	        }
-	    } else if ("lawyer".equalsIgnoreCase(role)) {
-	        Lawyer l = lservice.verify(email, password);
-	        if (l != null) {
-	            session.setAttribute("email", email);
-	            session.setAttribute("lawyer", l);
-	            return "DashBoard";
-	        }
-	    }
+		if ("client".equalsIgnoreCase(role)) {
+			Client c = clservice.verify(email, password);
+			if (c != null) {
+				session.setAttribute("email", email);
+				session.setAttribute("client", c);
+				return "DashBoard";
+			}
+		} else if ("lawyer".equalsIgnoreCase(role)) {
+			Lawyer l = lservice.verify(email, password);
+			if (l != null) {
+				session.setAttribute("email", email);
+				session.setAttribute("lawyer", l);
+				return "DashBoard";
+			}
+		}
 
-	    // If login fails
-	    session.setAttribute("loginError", true);
-	    return "redirect:/user/login";
+		// If login fails
+		session.setAttribute("loginError", true);
+		return "redirect:/user/login";
 	}
 
 	@GetMapping("loginTask")
 	public String handleInvalidGetLoginTask(HttpServletRequest request) {
-	    System.out.println("GET request blocked for loginTask from: " + request.getRemoteAddr());
-	    return "redirect:/user/login";
+		System.out.println("GET request blocked for loginTask from: " + request.getRemoteAddr());
+		return "redirect:/user/login";
 	}
 
-	
 	@RequestMapping("logout")
 	public String logout(HttpSession session) {
 		session.setAttribute("email", null);
@@ -222,7 +218,8 @@ public class MainController {
 	public String registerLawyer(@RequestParam(value = "name") String name,
 			@RequestParam(value = "specialization") String specialization, @RequestParam(value = "email") String email,
 			@RequestParam(value = "password") String password, @RequestParam(value = "cpassword") String cpassword,
-			@RequestParam(value = "phone") String phone, @RequestParam("file") MultipartFile file,HttpSession session) throws IOException {
+			@RequestParam(value = "phone") String phone, @RequestParam("file") MultipartFile file, HttpSession session)
+			throws IOException {
 		if (password.equals(cpassword)) {
 			Lawyer l = new Lawyer();
 			l.setEmail(email);
@@ -230,7 +227,7 @@ public class MainController {
 			l.setPassword(cpassword);
 			l.setPhone(phone);
 			l.setSpecialization(specialization);
-			Lawyer saveLawyer = lservice.saveLawyer(l,file);
+			Lawyer saveLawyer = lservice.saveLawyer(l, file);
 			if (saveLawyer != null) {
 				session.setAttribute("lawyer", saveLawyer);
 			} else {
@@ -239,111 +236,124 @@ public class MainController {
 		}
 		return "Login";
 	}
-	
+
 	@RequestMapping("profile")
 	public String profile(HttpSession session) {
-	Lawyer l = 	(Lawyer)session.getAttribute("lawyer");
-	if(l!=null)
-	{
-		return "lawyerProfile";
-	}
-	else
-	{
-		return "profile";
-	}
+		Lawyer l = (Lawyer) session.getAttribute("lawyer");
+		if (l != null) {
+			return "lawyerProfile";
+		} else {
+			return "profile";
+		}
 	}
 
-	
-	
 	@PostMapping("emailTask")
-    public String sendMessage(
-            @RequestParam String name,
-            @RequestParam String email,
-            @RequestParam String subject,
-            @RequestParam String message,
-            HttpSession session) {
+	public String sendMessage(@RequestParam String name, @RequestParam String email, @RequestParam String subject,
+			@RequestParam String message, HttpSession session) {
 
-        emailService.sendUserMessageToOwner(name, email, subject, message);
-        session.setAttribute("emailSend", "email Send Successfully");
-        return "contact";
-    }
-	
-	
+		emailService.sendUserMessageToOwner(name, email, subject, message);
+		session.setAttribute("emailSend", "email Send Successfully");
+		return "contact";
+	}
+
 	@PostMapping("/sendReq")
 	public String sendRequestToLawyer(HttpSession session, RedirectAttributes redirectAttributes) {
-	    Client client = (Client) session.getAttribute("client");
-	    Lawyer lawyer = (Lawyer) session.getAttribute("lawyer");
-	    if (client != null && lawyer != null) {
-	        String subject = "Client Request from " + client.getName();
-	        String message = "Hello " + lawyer.getName() + ",\n\n" +
-	                         "You have received a new request from a client.\n\n" +
-	                         "Client Details:\n" +
-	                         "Name: " + client.getName() + "\n" +
-	                         "Email: " + client.getEmail() + "\n" +
-	                         "Phone: " + client.getPhone() + "\n\n" +
-	                         "Please get in touch with the client if you're available.\n\n" +
-	                         "Regards,\nLegal Portal System";
+		Client client = (Client) session.getAttribute("client");
+		Lawyer lawyer = (Lawyer) session.getAttribute("lawyer");
+		if (client != null && lawyer != null) {
+			String subject = "Client Request from " + client.getName();
+			String message = "Hello " + lawyer.getName() + ",\n\n"
+					+ "You have received a new request from a client.\n\n" + "Client Details:\n" + "Name: "
+					+ client.getName() + "\n" + "Email: " + client.getEmail() + "\n" + "Phone: " + client.getPhone()
+					+ "\n\n" + "Please get in touch with the client if you're available.\n\n"
+					+ "Regards,\nLegal Portal System";
 
-	        emailService.sendRequestToLawyer(
-	                lawyer.getEmail(), subject, message, client.getEmail()
-	        );
-	        
-	        ClientRequests clr = new ClientRequests(client, lawyer);
-	        clService.addRequest(clr);
-	    }
+			emailService.sendRequestToLawyer(lawyer.getEmail(), subject, message, client.getEmail());
 
-	    redirectAttributes.addAttribute("attempted", "true");
-	    return "lawyerProfile";
+			ClientRequests clr = new ClientRequests(client, lawyer);
+			clService.addRequest(clr);
+		}
+
+		redirectAttributes.addAttribute("attempted", "true");
+		return "lawyerProfile";
 	}
+
 	@RequestMapping("clientRequests")
 	public String clientRequests(HttpSession session) {
-	    Lawyer lawyer = (Lawyer) session.getAttribute("lawyer");
+		Lawyer lawyer = (Lawyer) session.getAttribute("lawyer");
 
-	    if (lawyer != null) {
-	        List<ClientRequests> allRequest = clService.getAllRequest(lawyer);
-	        session.setAttribute("allBookings", allRequest);
-	    }
+		if (lawyer != null) {
+			List<ClientRequests> allRequest = clService.getAllRequest(lawyer);
+			session.setAttribute("allBookings", allRequest);
+		}
 
-	    return "clientRequest";
+		return "clientRequest";
 	}
 
 	@GetMapping("forgetPass")
 	public String forgPass() {
-		
+
 		return "ForgetPass";
 	}
+
 	@PostMapping("forgetPassword")
 	public String forgetPassword(@ModelAttribute Client cl) {
-	    Client user = clservice.getUser(cl.getEmail(), cl.getPassword());
-	    if (user != null) {
-	        return "redirect:/user/login";  // success - login page
-	    }
-	    return "ForgetPass"; // failure - redirect with error
+		Client user = clservice.getUser(cl.getEmail(), cl.getPassword());
+		if (user != null) {
+			return "redirect:/user/login"; // success - login page
+		}
+		return "ForgetPass"; // failure - redirect with error
 	}
 
 	@GetMapping("edit")
 	public String editProfile(HttpSession session) {
 		return "Edit";
 	}
+
 	@GetMapping("userProfile")
 	public String userProfile(HttpSession session) {
-		
-		return "Edit";
+		Client cl = (Client)session.getAttribute("client");
+		if(cl!=null) {
+			return "profile";
+		}
+		return "Login";
 	}
 	@GetMapping("changepass")
 	public String changepass() {
 		return "ChangePassword";
 	}
+
 	@PostMapping("changePassword")
-	public String changePassword() {
+	public String changePassword(@RequestParam(value = "newPassword") String password,
+			@RequestParam(value = "oldPassword") String oldPass,HttpSession session) {
+		Client client= (Client)session.getAttribute("client");
+		Lawyer lawyer = (Lawyer)session.getAttribute("lawyer");
+		if(client!=null) {
+			Client changePass = clservice.changePass(password,oldPass,client);
+			session.setAttribute("client", changePass);
+			return "redirect:/user/logout";
+		}
+		else if(lawyer!=null) {
+			Lawyer changePass = lservice.changePass(password,oldPass,lawyer);
+			session.setAttribute("lawyer", changePass);
+			return "redirect:/user/logout";
+		}
 		return "ChangePassword";
 	}
-	
+
 	@PostMapping("updateClient")
-	public String updateClient(@ModelAttribute Client cl,HttpSession session) {
+	public String updateClient(@ModelAttribute Client cl, HttpSession session) {
 		Client update = clservice.update(cl);
 		session.setAttribute("client", update);
 		return "redirect:/user/profile";
 	}
-	
+
+	@PostMapping("updateLawyer")
+	public String updateLawyer(@ModelAttribute Lawyer lw, HttpSession session) {
+		System.out.println(lw);
+		Lawyer update = lservice.update(lw);
+		session.setAttribute("lawyer", update);
+		return "redirect:/user/profile";
+	}
+
 }

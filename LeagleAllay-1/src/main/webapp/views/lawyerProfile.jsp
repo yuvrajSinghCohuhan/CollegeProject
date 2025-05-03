@@ -109,7 +109,21 @@
                         </div>
                     </div>
                 </div>
-
+                <%
+                    if (client == null) {
+                %>
+				<a href="/user/changepass" class="btn btn-info logout-btn mt-3">
+                    <i class="fas fa-sign-out-alt"></i> Change Password
+                </a>
+                <a href="/user/logout" class="btn btn-dark logout-btn mt-3">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </a>
+                <a href="/user/edit" class="btn btn-warning logout-btn mt-3">
+                    <i class="fas fa-sign-out-alt"></i> Edit
+                </a>
+                <%
+                    }
+                %>
                 <%
                     if (client != null) {
                 %>

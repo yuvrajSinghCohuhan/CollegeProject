@@ -20,7 +20,7 @@ import com.example.demo.Service.LawyerService;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
-@RequestMapping("admin")
+@RequestMapping("/admin")
 public class AdminController {
 	@Autowired
 	private AdminService adminService;

@@ -62,9 +62,15 @@
                     </a>
                 </div>
                 <div class="col-md-6 mb-3">
+                <%if("client".equalsIgnoreCase(role)){ %>
+                    <a href="/user/userProfile" class="btn btn-outline-success btn-block">
+                        <i class="fas fa-envelope-open-text"></i><br/>View Profile
+                    </a>
+                    <%}else{ %>
                     <a href="/user/profile" class="btn btn-outline-success btn-block">
                         <i class="fas fa-envelope-open-text"></i><br/>View Profile
                     </a>
+                    <%} %>
                 </div>
             </div>
 

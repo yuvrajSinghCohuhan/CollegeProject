@@ -2,7 +2,7 @@
 <%@page import="com.example.demo.Entities.Client"%>
 <%@page import="java.util.*"%>
 <%
-    String email1 = (String) session.getAttribute("email");
+    String email1 = (String) session.getAttribute("adminMail");
     if (email1 == null) {
         response.sendRedirect("/admin/login");
     }
